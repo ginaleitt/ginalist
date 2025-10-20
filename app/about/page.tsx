@@ -20,7 +20,7 @@ export default function AboutPage() {
 
         <div className="prose prose-slate prose-lg">
           <p className="text-xl text-slate-600 mb-8">
-            Welcome! I'm glad you're here.
+            Welcome! I&apos;m glad you&apos;re here.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
@@ -36,7 +36,7 @@ export default function AboutPage() {
           </h2>
 
           <ul className="list-disc list-inside space-y-2 text-slate-700 ml-4 mb-6">
-            <li><strong>Real experience:</strong> I only recommend products I've actually used or thoroughly researched</li>
+            <li><strong>Real experience:</strong> I only recommend products I&apos;ve actually used or thoroughly researched</li>
             <li><strong>Honest reviews:</strong> I share both pros and cons</li>
             <li><strong>No fluff:</strong> Straight to the point, no unnecessary filler</li>
             <li><strong>Transparent:</strong> I clearly disclose affiliate relationships</li>
@@ -54,7 +54,7 @@ export default function AboutPage() {
 
           <p className="text-slate-700 leading-relaxed mb-6">
             <strong>Important:</strong> I never let affiliate commissions influence my recommendations. 
-            If a product isn't worth buying, I won't recommend it, regardless of potential earnings.
+            If a product isn&apos;t worth buying, I won&apos;t recommend it, regardless of potential earnings.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
@@ -63,7 +63,7 @@ export default function AboutPage() {
 
           <p className="text-slate-700 leading-relaxed mb-6">
             Have a question or suggestion? Want to see a specific product category covered? 
-            I'd love to hear from you!
+            I&apos;d love to hear from you!
           </p>
 
           <div className="bg-slate-100 border border-slate-200 rounded-lg p-6 mt-8">
