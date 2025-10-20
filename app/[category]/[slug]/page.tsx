@@ -41,6 +41,33 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
+// Generate JSON-LD structured data for articles
+function generateArticleSchema(post: any, category: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Person',
+      name: 'Ginalist',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Ginalist',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://ginalist.vercel.app/logo.png', // Update with your actual domain
+      },
+    },
+    articleSection: category,
+    keywords: post.tags?.join(', ') || '',
+  };
+}
+
+
 export default async function PostPage({ params }: PageProps) {
   const { category, slug } = await params;
   const post = getPostBySlug(category, slug);
@@ -49,50 +76,60 @@ export default async function PostPage({ params }: PageProps) {
     notFound();
   }
 
+
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      <Navigation />
+        <Navigation />
 
-      {/* Article */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Category Badge */}
-        <Link 
-          href={`/${category}`}
-          className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4 hover:bg-blue-200"
-        >
-          {category}
-        </Link>
+        {/* Structured Data */}
+        <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateArticleSchema(post, category)),
+        }}
+        />
 
-        {/* Title */}
-        <h1 className="text-4xl font-bold text-slate-900 mb-4">
-          {post.title}
-        </h1>
+        {/* Article */}
+        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            {/* Category Badge */}
+            <Link 
+            href={`/${category}`}
+            className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4 hover:bg-blue-200"
+            >
+            {category}
+            </Link>
 
-        {/* Meta */}
-        <div className="flex items-center gap-4 text-slate-600 mb-8 pb-8 border-b border-slate-200">
-          <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
-        </div>
+            {/* Title */}
+            <h1 className="text-4xl font-bold text-slate-900 mb-4">
+            {post.title}
+            </h1>
 
-        {/* Content */}
-        <div className="mdx-content">
-          <MDXRemote source={post.content} components={mdxComponents} />
-        </div>
-      </article>
+            {/* Meta */}
+            <div className="flex items-center gap-4 text-slate-600 mb-8 pb-8 border-b border-slate-200">
+            <time dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                })}
+            </time>
+            </div>
 
-      {/* Footer */}
-      <footer className="bg-white mt-20 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center text-slate-600">
-            © 2024 Ginalist. All recommendations are genuine.
-          </p>
-        </div>
-      </footer>
+            {/* Content */}
+            <div className="mdx-content">
+            <MDXRemote source={post.content} components={mdxComponents} />
+            </div>
+        </article>
+
+        {/* Footer */}
+        <footer className="bg-white mt-20 border-t border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <p className="text-center text-slate-600">
+                © 2024 Ginalist. All recommendations are genuine.
+            </p>
+            </div>
+        </footer>
     </div>
   );
 }
