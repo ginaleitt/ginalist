@@ -1,11 +1,13 @@
-export default function Home() {
-  const currentYear = new Date().getFullYear();
+import Navigation from '@/components/Navigation';
+import { getPostsByCategory } from '@/lib/mdx';
+import Link from 'next/link';
 
+export default function Home() {
   const categories = [
     {
       name: 'Gaming',
       slug: 'gaming',
-      description: 'Game recommendations for any mood',
+      description: 'Controllers, headsets, and gear for gamers',
       emoji: '🎮'
     },
     {
@@ -40,15 +42,15 @@ export default function Home() {
     }
   ];
 
+  // Get post counts for each category
+  const categoriesWithCounts = categories.map(category => ({
+    ...category,
+    postCount: getPostsByCategory(category.slug).length
+  }));
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-4xl font-bold text-slate-900">Ginalist</h1>
-          <p className="text-slate-600 mt-2">Curated lists of things that are worth it</p>
-        </div>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -63,8 +65,8 @@ export default function Home() {
 
         {/* Category Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category) => (
-            <a
+          {categoriesWithCounts.map((category) => (
+            <Link
               key={category.slug}
               href={`/${category.slug}`}
               className="group bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-slate-200 hover:border-slate-300"
@@ -73,8 +75,11 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                 {category.name}
               </h3>
-              <p className="text-slate-600">{category.description}</p>
-            </a>
+              <p className="text-slate-600 mb-3">{category.description}</p>
+              <p className="text-sm text-slate-500">
+                {category.postCount} {category.postCount === 1 ? 'list' : 'lists'}
+              </p>
+            </Link>
           ))}
         </div>
       </main>
@@ -83,7 +88,7 @@ export default function Home() {
       <footer className="bg-white mt-20 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-slate-600">
-            © {currentYear} Ginalist
+            © 2024 Ginalist. All recommendations are genuine.
           </p>
         </div>
       </footer>

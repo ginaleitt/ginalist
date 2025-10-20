@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { mdxComponents } from '@/components/MDXComponents';
+import Navigation from '@/components/Navigation';
 
 interface PageProps {
   params: Promise<{
@@ -50,14 +51,7 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <Link href="/" className="text-4xl font-bold text-slate-900 hover:text-slate-700">
-            Ginalist
-          </Link>
-        </div>
-      </header>
+      <Navigation />
 
       {/* Article */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
