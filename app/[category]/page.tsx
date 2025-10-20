@@ -2,6 +2,8 @@ import { getPostsByCategory } from '@/lib/mdx';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+
 interface CategoryPageProps {
   params: Promise<{
     category: string;
@@ -105,13 +107,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white mt-20 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center text-slate-600">
-            © 2024 Ginalist. All recommendations are genuine.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

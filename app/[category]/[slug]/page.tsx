@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { mdxComponents } from '@/components/MDXComponents';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 interface PageProps {
   params: Promise<{
@@ -123,13 +124,7 @@ export default async function PostPage({ params }: PageProps) {
         </article>
 
         {/* Footer */}
-        <footer className="bg-white mt-20 border-t border-slate-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <p className="text-center text-slate-600">
-                © 2024 Ginalist. All recommendations are genuine.
-            </p>
-            </div>
-        </footer>
+        <Footer />
     </div>
   );
 }
