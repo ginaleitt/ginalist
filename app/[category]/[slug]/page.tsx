@@ -1,7 +1,8 @@
 import { getPostBySlug, getAllPosts } from '@/lib/mdx';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
+import Link from 'next/link';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { mdxComponents } from '@/components/MDXComponents';
 
 interface PageProps {
   params: Promise<{
@@ -10,7 +11,9 @@ interface PageProps {
   }>;
 }
 
-// This generates static pages for all posts at build time
+
+
+// Generate static pages for all posts at build time
 export async function generateStaticParams() {
   const posts = getAllPosts();
   
@@ -38,8 +41,6 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function PostPage({ params }: PageProps) {
-    const currentYear = new Date().getFullYear();
-
   const { category, slug } = await params;
   const post = getPostBySlug(category, slug);
 
@@ -53,8 +54,8 @@ export default async function PostPage({ params }: PageProps) {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Link href="/" className="text-4xl font-bold text-slate-900 hover:text-slate-700">
-        Ginalist
-        </Link>
+            Ginalist
+          </Link>
         </div>
       </header>
 
@@ -85,22 +86,8 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {/* Content */}
-        <div className="text-slate-800 space-y-6">
-        <ReactMarkdown
-            components={{
-                h1: ({...props}) => <h1 className="text-4xl font-bold text-slate-900 mt-8 mb-4" {...props} />,
-                h2: ({...props}) => <h2 className="text-3xl font-bold text-slate-900 mt-8 mb-4" {...props} />,
-                h3: ({...props}) => <h3 className="text-2xl font-bold text-slate-900 mt-6 mb-3" {...props} />,
-                p: ({...props}) => <p className="text-slate-700 leading-relaxed mb-4" {...props} />,
-                ul: ({...props}) => <ul className="list-disc list-inside space-y-2 text-slate-700 ml-4" {...props} />,
-                ol: ({...props}) => <ol className="list-decimal list-inside space-y-2 text-slate-700 ml-4" {...props} />,
-                li: ({...props}) => <li className="text-slate-700" {...props} />,
-                strong: ({...props}) => <strong className="font-bold text-slate-900" {...props} />,
-                hr: ({...props}) => <hr className="my-8 border-slate-300" {...props} />,
-            }}
-        >
-            {post.content}
-        </ReactMarkdown>
+        <div className="mdx-content">
+          <MDXRemote source={post.content} components={mdxComponents} />
         </div>
       </article>
 
@@ -108,7 +95,7 @@ export default async function PostPage({ params }: PageProps) {
       <footer className="bg-white mt-20 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-slate-600">
-             © {currentYear} Ginalist Ginalist. 
+            © 2024 Ginalist. All recommendations are genuine.
           </p>
         </div>
       </footer>
