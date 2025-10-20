@@ -6,6 +6,7 @@ interface ImageWithCaptionProps {
   caption?: string;
   width?: number;
   height?: number;
+  priority?: boolean;
 }
 
 export default function ImageWithCaption({
@@ -14,6 +15,7 @@ export default function ImageWithCaption({
   caption,
   width = 800,
   height = 600,
+  priority = false,
 }: ImageWithCaptionProps) {
   return (
     <figure className="my-8">
@@ -24,7 +26,10 @@ export default function ImageWithCaption({
           width={width}
           height={height}
           className="w-full h-auto object-cover"
-          priority={false}
+          priority={priority}
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
         />
       </div>
       {caption && (
