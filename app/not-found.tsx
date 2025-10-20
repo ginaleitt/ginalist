@@ -33,7 +33,7 @@ export default function NotFound() {
           </div>
 
           <div className="mt-12">
-            <p className="text-sm text-slate-500 mb-4">Popular categories:</p>
+            <p className="text-sm text-slate-500 mb-4">Categories:</p>
             <div className="flex flex-wrap gap-3 justify-center">
               {['gaming', 'tech', 'books', 'art', 'work', 'parenting'].map((category) => (
                 <Link

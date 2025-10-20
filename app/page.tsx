@@ -1,6 +1,7 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { getPostsByCategory } from '@/lib/mdx';
+import FeaturedPosts from '@/components/FeaturedPosts';
+import { getPostsByCategory, getFeaturedPosts } from '@/lib/mdx';
 import Link from 'next/link';
 
 export default function Home() {
@@ -49,6 +50,9 @@ export default function Home() {
     postCount: getPostsByCategory(category.slug).length
   }));
 
+  // Get featured posts
+  const featuredPosts = getFeaturedPosts();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       <Navigation />
@@ -57,10 +61,10 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">
-            Honest recommendations from real experience
+            Honest recommendations from my real experience
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            No fluff, no fake reviews. Just authentic lists of products I actually use and recommend.
+            Authentic lists of products I actually use and recommend.
           </p>
         </div>
 
@@ -85,7 +89,9 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
+      {/* Featured Posts Section */}
+      <FeaturedPosts posts={featuredPosts} />
+
       <Footer />
     </div>
   );

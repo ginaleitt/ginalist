@@ -12,6 +12,7 @@ export interface Post {
   date: string;
   tags: string[];
   content: string;
+  featured?: boolean;
 }
 
 // Get all posts from a category
@@ -41,6 +42,7 @@ export function getPostsByCategory(category: string): Post[] {
         date: data.date,
         tags: data.tags || [],
         content,
+        featured: data.featured || false,
       };
     });
 
@@ -63,6 +65,7 @@ export function getPostBySlug(category: string, slug: string): Post | null {
       date: data.date,
       tags: data.tags || [],
       content,
+      featured: data.featured || false,
     };
   } catch {
     return null;
@@ -89,4 +92,10 @@ export function getAllPosts(): Post[] {
   });
 
   return allPosts.sort((a, b) => (a.date > b.date ? -1 : 1));
+}
+
+// Get all featured posts
+export function getFeaturedPosts(): Post[] {
+  const allPosts = getAllPosts();
+  return allPosts.filter(post => post.featured === true);
 }
