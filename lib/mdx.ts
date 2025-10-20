@@ -64,7 +64,7 @@ export function getPostBySlug(category: string, slug: string): Post | null {
       tags: data.tags || [],
       content,
     };
-  } catch (error) {
+  } catch {
     return null;
   }
 }
