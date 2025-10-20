@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     template: '%s | Ginalist',
   },
   description: 'Curated lists of products worth buying. No fluff, no fake reviews. Just authentic recommendations from real experience.',
+  verification: {
+    other: {
+      'impact-site-verification': 'ec4a3300-4850-4d66-b303-47eed0d7aaac'
+    }
+  },
   keywords: ['product recommendations', 'reviews', 'buying guides', 'curated lists', 'honest reviews'],
   authors: [{ name: 'Ginalist' }],
   creator: 'Ginalist',
